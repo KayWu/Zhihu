@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Zhihu Daily</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_start">Start</string>
+    <string name="date_format">EEE, MMM d, yyyy</string>
+
+</resources>
