@@ -1,25 +1,25 @@
-package com.kay.zhihu.UI;
+package com.kay.zhihu.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.kay.zhihu.R;
-import com.kay.zhihu.Support.LoadNewsTask;
-import com.kay.zhihu.Support.NewsAdapter;
+import com.kay.zhihu.adapter.NewsAdapter;
+import com.kay.zhihu.task.LoadNewsTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
     private SwipeRefreshLayout refreshLayout;
     private ListView lv;
-    private TextView tvDate;
     private NewsAdapter adapter;
 
     @Override
@@ -33,11 +33,11 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         lv = (ListView) findViewById(R.id.lv);
-        tvDate = (TextView) findViewById(R.id.tv_date);
-        tvDate.setText(getTime());
+        setTitle(getTime());
         adapter = new NewsAdapter(this, R.layout.listview_item);
         lv.setAdapter(adapter);
         new LoadNewsTask(adapter).execute();
+        lv.setOnItemClickListener(this);
 
     }
 
@@ -81,5 +81,10 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         SimpleDateFormat format = new SimpleDateFormat(getString(R.string.date_format));
         return format.format(c.getTime());
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        NewsDetailActivity.startActivity(this, adapter.getItem(position).getId());
     }
 }

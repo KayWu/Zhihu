@@ -1,6 +1,11 @@
-package com.kay.zhihu.Support;
+package com.kay.zhihu.task;
 
 import android.os.AsyncTask;
+
+import com.kay.zhihu.entity.News;
+import com.kay.zhihu.http.Http;
+import com.kay.zhihu.http.JsonHelper;
+import com.kay.zhihu.adapter.NewsAdapter;
 
 import org.json.JSONException;
 

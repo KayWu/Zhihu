@@ -1,4 +1,4 @@
-package com.kay.zhihu.Support;
+package com.kay.zhihu.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +12,8 @@ import java.net.URL;
 public class Http {
     public static String NEWSLIST_LATEST = "http://news-at.zhihu.com/api/4/news/latest";
     public static String STORY_VIEW = "http://daily.zhihu.com/story/";
+    public static String NEWSDETAIL = "http://news-at.zhihu.com/api/4/news/";
+
 
     public static String get(String urlAddr) throws IOException {
         HttpURLConnection con = null;
@@ -44,5 +46,7 @@ public class Http {
     public static String getLastNewsList() throws IOException {
         return get(NEWSLIST_LATEST);
     }
+
+    public static String getNewsDetail(int id) throws IOException {return get(NEWSDETAIL + id);}
 
 }

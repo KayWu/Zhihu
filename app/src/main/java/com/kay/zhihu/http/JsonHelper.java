@@ -1,4 +1,8 @@
-package com.kay.zhihu.Support;
+package com.kay.zhihu.http;
+
+import com.google.gson.Gson;
+import com.kay.zhihu.entity.News;
+import com.kay.zhihu.entity.NewsDetail;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,12 +24,18 @@ public class JsonHelper {
             int id = newsInJson.optInt("id");
             String title = newsInJson.optString("title");
             String image = "";
-            if (newsInJson.has("image")) {
-                image = newsInJson.getJSONArray("image").getString(0);
+            if (newsInJson.has("images")) {
+                image = (String) newsInJson.getJSONArray("images").get(0);
+
             }
             News news = new News(id, title, image);
             newsList.add(news);
         }
         return newsList;
+    }
+
+    public static NewsDetail parseJsonToDetail(String json) throws JSONException {
+        Gson gson = new Gson();
+        return gson.fromJson(json, NewsDetail.class);
     }
 }

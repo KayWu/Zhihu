@@ -1,4 +1,4 @@
-package com.kay.zhihu.Support;
+package com.kay.zhihu.entity;
 
 /**
  * Created by mac on 15-2-3.
