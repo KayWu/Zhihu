@@ -7,6 +7,8 @@
 * listview使用卡片式UI(layer-list)
 * 收藏功能
 
+## APK
+[下载](https://github.com/Kay-Wu/Zhihu/blob/master/app-release.apk)
 
 ## Dependencies
 * gson-2.3.1
