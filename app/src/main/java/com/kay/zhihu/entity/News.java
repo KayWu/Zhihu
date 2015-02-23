@@ -1,9 +1,11 @@
 package com.kay.zhihu.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by mac on 15-2-3.
  */
-public class News {
+public class News implements Serializable{
     private int id;
     private String title;
     private String image;

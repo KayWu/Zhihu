@@ -15,7 +15,7 @@
             android:id="@+id/lv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:divider="@null"/>
+            style="@style/NewsListStyle"/>
 
 
     </android.support.v4.widget.SwipeRefreshLayout>

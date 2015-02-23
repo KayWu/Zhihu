@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
  * Created by mac on 15-2-3.
  */
 public class ZhihuDailyApplication extends Application {
+
     public static void initImageLoader(Context context) {
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                 .denyCacheImageMultipleSizesInMemory()
@@ -20,9 +21,15 @@ public class ZhihuDailyApplication extends Application {
         ImageLoader.getInstance().init(config);
     }
 
+
+
     @Override
     public void onCreate() {
         super.onCreate();
         initImageLoader(this);
+
     }
+
+
+
 }

@@ -31,6 +31,8 @@ public class NewsAdapter extends ArrayAdapter<News> {
             .considerExifParams(true)
             .build();
 
+
+
     public NewsAdapter(Context context, int resource) {
         super(context, resource);
         this.mInflater = LayoutInflater.from(context);

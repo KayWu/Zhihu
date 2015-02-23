@@ -2,7 +2,8 @@
 <resources>
     <string name="action_settings">设置</string>
     <string name="app_name">知乎日报</string>
-    <string name="action_start">收藏</string>
     <string name="date_format">yyyy年M月d日 EEEE</string>
     <string name="action_bar_label">乎日报</string>
+    <string name="action_star">收藏</string>
+    <string name="favourite">收藏夹</string>
 </resources>

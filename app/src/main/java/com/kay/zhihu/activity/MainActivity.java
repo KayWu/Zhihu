@@ -1,6 +1,7 @@
 package com.kay.zhihu.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
@@ -60,6 +61,11 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_favourite) {
+            Intent i = new Intent(this, FavouriteActivity.class);
+            startActivity(i);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -85,6 +91,6 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        NewsDetailActivity.startActivity(this, adapter.getItem(position).getId());
+        NewsDetailActivity.startActivity(this, adapter.getItem(position));
     }
 }

@@ -39,6 +39,7 @@ public class LoadNewsDetailTask extends AsyncTask<Integer, Void, NewsDetail> {
         String headerImage;
         if (mNewsDetail.getImage() == null || mNewsDetail.getImage() == "") {
             headerImage = "file:///android_asset/news_detail_header_image.jpg";
+
         } else {
             headerImage = mNewsDetail.getImage();
         }

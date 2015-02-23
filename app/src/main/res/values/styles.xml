@@ -18,6 +18,10 @@
     <style name="MyActionBarTitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">#ffffff</item>
         <item name="android:textStyle">bold</item>
+    </style>
 
+    <style name="NewsListStyle">
+        <item name="android:background">#ffeeeeee</item>
+        <item name="android:divider">@null</item>
     </style>
 </resources>

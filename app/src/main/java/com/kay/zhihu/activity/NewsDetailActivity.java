@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import com.kay.zhihu.R;
+import com.kay.zhihu.db.DailyNewsDB;
+import com.kay.zhihu.entity.News;
 import com.kay.zhihu.task.LoadNewsDetailTask;
 
 /**
@@ -16,6 +18,8 @@ import com.kay.zhihu.task.LoadNewsDetailTask;
  */
 public class NewsDetailActivity extends Activity {
     private WebView mWebView;
+    private boolean isFavourite = false;
+    private News news;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +28,9 @@ public class NewsDetailActivity extends Activity {
         mWebView = (WebView) findViewById(R.id.webview);
         setWebView(mWebView);
 
-        int id = getIntent().getIntExtra("news_id", 4538389);
-        new LoadNewsDetailTask(mWebView).execute(id);
+        news = (News) getIntent().getSerializableExtra("news");
+        new LoadNewsDetailTask(mWebView).execute(news.getId());
+        isFavourite = DailyNewsDB.getInstance(this).isFavourite(news);
     }
 
     private void setWebView(WebView mWebView) {
@@ -34,9 +39,9 @@ public class NewsDetailActivity extends Activity {
         mWebView.setHorizontalScrollBarEnabled(false);
     }
 
-    public static void startActivity(Context context, int id) {
+    public static void startActivity(Context context, News news) {
         Intent i = new Intent(context, NewsDetailActivity.class);
-        i.putExtra("news_id", id);
+        i.putExtra("news", news);
         context.startActivity(i);
     }
 
@@ -45,6 +50,7 @@ public class NewsDetailActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (isFavourite) menu.findItem(R.id.action_favourite).setIcon(R.drawable.fav_active);
         return true;
     }
 
@@ -57,6 +63,19 @@ public class NewsDetailActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.action_favourite) {
+            if (!isFavourite) {
+                DailyNewsDB.getInstance(this).saveFavourite(news);
+                item.setIcon(R.drawable.fav_active);
+                isFavourite = true;
+            } else {
+                DailyNewsDB.getInstance(this).deleteFavourite(news);
+                item.setIcon(R.drawable.fav_normal);
+                isFavourite = false;
+            }
             return true;
         }
 
