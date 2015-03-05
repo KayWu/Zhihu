@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.kay.zhihu.R;
 import com.kay.zhihu.adapter.NewsAdapter;
 import com.kay.zhihu.task.LoadNewsTask;
+import com.kay.zhihu.utility.Utility;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,11 +23,13 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
     private SwipeRefreshLayout refreshLayout;
     private ListView lv;
     private NewsAdapter adapter;
+    private boolean isConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        isConnected = Utility.checkNetworkConnection(this);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_layout);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -37,8 +40,9 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
         setTitle(getTime());
         adapter = new NewsAdapter(this, R.layout.listview_item);
         lv.setAdapter(adapter);
-        new LoadNewsTask(adapter).execute();
         lv.setOnItemClickListener(this);
+        if (isConnected) new LoadNewsTask(adapter).execute();
+        else Utility.noNetworkAlert(this);
 
     }
 
@@ -72,13 +76,18 @@ public class MainActivity extends Activity implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onRefresh() {
-        new LoadNewsTask(adapter, new LoadNewsTask.onFinishListener() {
-            @Override
-            public void afterTaskFinish() {
-                refreshLayout.setRefreshing(false);
+        if (isConnected) {
+            new LoadNewsTask(adapter, new LoadNewsTask.onFinishListener() {
+                @Override
+                public void afterTaskFinish() {
+                    refreshLayout.setRefreshing(false);
 //                Toast.makeText(MainActivity.this, "Refresh success", Toast.LENGTH_SHORT).show();
-            }
-        }).execute();
+                }
+            }).execute();
+        } else {
+            Utility.noNetworkAlert(MainActivity.this);
+            refreshLayout.setRefreshing(false);
+        }
     }
 
 

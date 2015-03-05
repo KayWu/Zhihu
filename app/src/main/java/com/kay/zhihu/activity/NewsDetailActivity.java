@@ -12,6 +12,7 @@ import com.kay.zhihu.R;
 import com.kay.zhihu.db.DailyNewsDB;
 import com.kay.zhihu.entity.News;
 import com.kay.zhihu.task.LoadNewsDetailTask;
+import com.kay.zhihu.utility.Utility;
 
 /**
  * Created by mac on 15-2-17.
@@ -20,6 +21,7 @@ public class NewsDetailActivity extends Activity {
     private WebView mWebView;
     private boolean isFavourite = false;
     private News news;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +42,13 @@ public class NewsDetailActivity extends Activity {
     }
 
     public static void startActivity(Context context, News news) {
-        Intent i = new Intent(context, NewsDetailActivity.class);
-        i.putExtra("news", news);
-        context.startActivity(i);
+        if (Utility.checkNetworkConnection(context)) {
+            Intent i = new Intent(context, NewsDetailActivity.class);
+            i.putExtra("news", news);
+            context.startActivity(i);
+        } else {
+            Utility.noNetworkAlert(context);
+        }
     }
 
 
