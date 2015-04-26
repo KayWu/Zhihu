@@ -1,7 +1,3 @@
-# Built application files
-*.apk
-*.ap_
-
 # Files for the Dalvik VM
 *.dex
 
@@ -27,3 +23,12 @@ proguard/
 
 # Android Studio
 .idea/workspace.xml
+.idea/
+.idea/libraries
+
+# Mac
+.DS_Store
+
+# Vim
+*.swp
+tags
