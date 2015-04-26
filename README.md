@@ -16,7 +16,7 @@
 * [ZhihuDailyPurify](https://github.com/izzyleung/ZhihuDailyPurify) 知乎API分析
 
 ## APK
-[下载](https://github.com/Kay-Wu/Zhihu/blob/master/app-release.apk)
+[下载](https://raw.githubusercontent.com/KayWu/Zhihu/master/app-release.apk)
 
 ##License
 GPL v2.0
